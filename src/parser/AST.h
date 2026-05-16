@@ -48,4 +48,53 @@ struct BinaryExpr : Expr {
         right->dump(indent + 2);
     }
 };
+struct BooleanExpr : Expr {
+    bool value;
 
+    BooleanExpr(bool val) : value(val) {}
+
+    void dump(int indent = 0) override {
+        std::cout << std::string(indent, ' ') << "Boolean(" << (value ? "true" : "false") << ")\n";
+    }
+};
+
+struct GroupingExpr : Expr {
+    std::unique_ptr<Expr> expression;
+
+    GroupingExpr(std::unique_ptr<Expr> expr) : expression(std::move(expr)) {}
+
+    void dump(int indent = 0) override {
+        std::cout << std::string(indent, ' ') << "Grouping\n";
+        if (expression) expression->dump(indent + 2);
+    }
+};
+
+struct VariableExpr : Expr {
+    Token name;
+
+    VariableExpr(Token n) : name(n) {}
+
+    void dump(int indent = 0) override {
+        std::cout << std::string(indent, ' ') << "Variable(" << name.lexeme << ")\n";
+    }
+};
+
+struct AssignExpr : Expr {
+    Token name;
+    std::unique_ptr<Expr> value;
+
+    AssignExpr(Token n, std::unique_ptr<Expr> v) : name(n), value(std::move(v)) {}
+
+    void dump(int indent = 0) override {
+        std::cout << std::string(indent, ' ') << "Assign(" << name.lexeme << ")\n";
+        if (value) value->dump(indent + 2);
+    }
+};
+
+struct InputExpr : Expr {
+    InputExpr() {}
+
+    void dump(int indent = 0) override {
+        std::cout << std::string(indent, ' ') << "Input\n";
+    }
+};

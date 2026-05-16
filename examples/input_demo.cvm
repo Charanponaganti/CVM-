@@ -1,0 +1,10 @@
+let a = input
+let b = input
+print a + b
+print a * b
+
+if a < b {
+    print 1
+} else {
+    print 0
+}

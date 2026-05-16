@@ -49,7 +49,16 @@ void Lexer::scanToken() {
             break;
 
         case '=':
-            addToken(TokenType::EQUAL, "=");
+            if (peek() == '=') {
+                advance();
+                addToken(TokenType::EQUAL_EQUAL, "==");
+            } else {
+                addToken(TokenType::EQUAL, "=");
+            }
+            break;
+
+        case '<':
+            addToken(TokenType::LESS_THAN, "<");
             break;
 
         case '(':
@@ -58,6 +67,14 @@ void Lexer::scanToken() {
 
         case ')':
             addToken(TokenType::RIGHT_PAREN, ")");
+            break;
+
+        case '{':
+            addToken(TokenType::LEFT_BRACE, "{");
+            break;
+
+        case '}':
+            addToken(TokenType::RIGHT_BRACE, "}");
             break;
 
         case ' ':
@@ -96,10 +113,20 @@ void Lexer::identifier() {
 
     if (value == "let")
         addToken(TokenType::LET, value);
-
     else if (value == "print")
         addToken(TokenType::PRINT, value);
-
+    else if (value == "if")
+        addToken(TokenType::IF, value);
+    else if (value == "else")
+        addToken(TokenType::ELSE, value);
+    else if (value == "while")
+        addToken(TokenType::WHILE, value);
+    else if (value == "true")
+        addToken(TokenType::TRUE, value);
+    else if (value == "false")
+        addToken(TokenType::FALSE, value);
+    else if (value == "input")
+        addToken(TokenType::INPUT, value);
     else
         addToken(TokenType::IDENTIFIER, value);
 }
