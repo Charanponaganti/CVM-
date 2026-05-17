@@ -1,0 +1,47 @@
+print 111111111
+print 111111111
+let running = 1
+
+while running == 1 {
+    print 1
+    print 2
+    print 3
+    print 4
+    print 0
+
+    let choice = input
+
+    if choice == 1 {
+        let a = input
+        let b = input
+        print a + b
+    }
+
+    if choice == 2 {
+        let a = input
+        let b = input
+        print a - b
+    }
+
+    if choice == 3 {
+        let a = input
+        let b = input
+        print a * b
+    }
+
+    if choice == 4 {
+        let a = input
+        let b = input
+        if b == 0 {
+            print 0
+        } else {
+            print a / b
+        }
+    }
+
+    if choice == 0 {
+        running = 0
+    }
+}
+
+print 999
